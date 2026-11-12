@@ -1,16 +1,20 @@
-/*
-  Global security headers
-*/
+# Security headers for all responses
 /*
   X-Content-Type-Options: nosniff
   Referrer-Policy: strict-origin-when-cross-origin
 
+# Keep HTML fresh after deployments
 /
   Cache-Control: public, max-age=300, must-revalidate
 
 /*.html
   Cache-Control: public, max-age=300, must-revalidate
 
+# The installer is mutable at this URL, so cache it briefly in browsers and longer at the edge
+/install.sh
+  Cache-Control: public, max-age=3600, s-maxage=86400
+
+# Cache static assets
 /*.js
   Cache-Control: public, max-age=31536000, immutable
 
@@ -43,4 +47,3 @@
 
 /*.woff2
   Cache-Control: public, max-age=31536000, immutable
-*/
