@@ -93,6 +93,27 @@
       cursor: pointer;
     }
     .mode-switch:hover { background: #484f58; }
+    .term-header-actions { display: flex; align-items: center; gap: 8px; }
+    .github-button {
+      display: inline-block;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 4px 10px;
+      color: var(--text);
+      background: #fff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .github-button:hover { background: #f1f5f9; }
+    body.sh-mode .github-button {
+      color: #c9d1d9;
+      background: #21262d;
+      border-color: #30363d;
+      font-family: inherit;
+    }
+    body.sh-mode .github-button:hover { background: #30363d; }
     .term-body { padding: 24px; }
     .term-body h1 { color: #f0f6fc; font-size: 20px; margin-top: 0; margin-bottom: 8px; }
     .term-body p { color: #8b949e; font-size: 14px; line-height: 1.5; margin-top: 0; }
@@ -312,7 +333,10 @@
           </div>
           <div class="term-title">bash — dispelmagic.sh (exit code 403)</div>
         </div>
-        <button class="mode-switch" onclick="setViewMode('ai')">Preview .ai Pitch Deck →</button>
+        <div class="term-header-actions">
+          <a class="github-button" href="https://github.com/dispelmagic-ai/dispelmagic.sh" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+          <button class="mode-switch" onclick="setViewMode('ai')">Preview .ai Pitch Deck →</button>
+        </div>
       </div>
       <div class="term-body">
         <h1>Dispel Magic CLI (v0.0.0-broken)</h1>
@@ -353,7 +377,10 @@
   <div id="ai-view">
     <header class="ai-header">
       <div class="logo">DispelMagic.ai</div>
-      <div><a href="https://dispelmagic.sh" onclick="event.preventDefault(); setViewMode('sh');" style="color: var(--muted); text-decoration: none; font-size: 0.9rem;">Developer Portal (.sh) →</a></div>
+      <div style="display: flex; align-items: center; gap: 16px;">
+        <a class="github-button" href="https://github.com/dispelmagic-ai/dispelmagic.sh" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        <a href="https://dispelmagic.sh" onclick="event.preventDefault(); setViewMode('sh');" style="color: var(--muted); text-decoration: none; font-size: 0.9rem;">Developer Portal (.sh) →</a>
+      </div>
     </header>
 
     <div class="hero">
