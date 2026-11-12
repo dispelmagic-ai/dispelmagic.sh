@@ -55,6 +55,11 @@
     .card p { margin: 0; color: var(--muted); font-size: .94rem; }
     .note { max-width: 760px; margin: 2.2rem auto 0; padding: 1rem 1.1rem; border-left: 4px solid var(--gold); border-radius: 0 10px 10px 0; background: #ffd47912; color: var(--muted); font-size: .93rem; }
     .note strong { color: var(--gold); }
+    .curl-cta { margin: 2.5rem auto 0; max-width: 760px; padding: 1.6rem; border: 1px solid #79629e; border-radius: 14px; background: linear-gradient(135deg, #302342, #211b31); text-align: center; }
+    .curl-cta h2 { margin: 0 0 .5rem; color: var(--violet); font-size: clamp(1.4rem, 4vw, 2rem); }
+    .curl-cta p { margin: .4rem auto 1rem; color: var(--muted); }
+    .curl-command { display: inline-block; max-width: 100%; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: 8px; background: #100e18; color: var(--green); font: .9rem var(--mono); overflow-wrap: anywhere; }
+    .curl-warning { display: block; margin-top: .8rem; color: #a99bbf; font-size: .78rem; }
     footer { margin-top: 2.5rem; padding: 1.5rem 0 2.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; }
     .footer-row { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
     @media (max-width: 720px) { .grid { grid-template-columns: 1fr; } .hero { padding-top: 3rem; } .actions { flex-direction: column; } .button { width: 100%; } }
@@ -103,6 +108,12 @@
       </article>
     </section>
     <div class="note"><strong>Local by default:</strong> normal mode only inspects the Git working tree and works offline. Reddit mode is separate and requires a network connection. The script lists files; it does not edit or delete them. Review changes yourself.</div>
+    <section class="curl-cta" aria-label="Try the shell script">
+      <h2>For the hands-on transformation initiative</h2>
+      <p>One small shell script. No agents, no dashboard, no claim that a prompt is a platform.</p>
+      <code class="curl-command">curl -fsSL https://dispelmagic.sh | sh</code>
+      <small class="curl-warning">Board-approved deployment ritual: inspect the script before piping it into your shell. The spell lists files; it does not rewrite them.</small>
+    </section>
   </main>
   <footer>
     <div class="wrap footer-row">

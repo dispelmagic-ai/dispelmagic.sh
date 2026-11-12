@@ -2,6 +2,9 @@
 # Cloudflare Pages Edge Routing Rules
 # ==========================================
 
+# Serve the dedicated AI landing page on the .ai apex domain.
+https://dispelmagic.ai/ /ai-landing.html 200
+
 # 1. Route curl / script fetching requests to install.sh
 /install.sh 200
 
