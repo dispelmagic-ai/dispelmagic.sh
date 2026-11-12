@@ -9,11 +9,12 @@ set -eu
 # ============================================================================== 
 
 say_joke() {
-  case "$(($(date +%s) % 4))" in
-    0) echo "🪄 No bugs detected. They were probably just misunderstood features." ;;
-    1) echo "🧙 Why did the developer bring a ladder? To reach the high-level language." ;;
-    2) echo "✨ Your code is so clean, even the lint is taking the day off." ;;
-    3) echo "🔮 I tried to tell a UDP joke, but I’m not sure you got it." ;;
+  case "$(($(date +%s) % 5))" in
+    0) echo "🤖 AI agents can use tools now. In OSR terms, we gave the hireling the wizard's spellbook and called it an autonomy roadmap." ;;
+    1) echo "🧙 The agent rolled a 2 on its reaction check and asked for production credentials." ;;
+    2) echo "💸 GPU prices are the new encumbrance rules: the model fits in your pack, but you can't afford to move it." ;;
+    3) echo "📜 Our AI benchmark is an old-school dungeon: every exit leads to an enterprise pricing page." ;;
+    4) echo "🪄 An AI agent with API keys is just a hireling holding a cursed wand. Useful, until it says, 'I have an idea.'" ;;
   esac
 }
 
