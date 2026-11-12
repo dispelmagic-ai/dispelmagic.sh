@@ -58,6 +58,7 @@
     .terminal-body { height: min(58vh, 500px); min-height: 340px; overflow-y: auto; padding: 20px; }
     .output-line { margin: 0 0 7px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
     .map-display { margin: 12px 0; padding: 10px; overflow-x: auto; border-radius: 4px; background: #0004; color: #908caa; font: 13px/1.25 ui-monospace, monospace; white-space: pre; border: 1px solid var(--border); }
+    .code-display { margin: 12px 0; padding: 12px; overflow-x: auto; border-radius: 4px; background: #0004; color: var(--blue); font: 13px/1.5 ui-monospace, monospace; white-space: pre; border: 1px solid var(--border); }
     .input-line { display: flex; align-items: center; gap: 10px; margin-top: 15px; }
     .prompt { color: var(--gold); white-space: nowrap; font-weight: 700; }
     .cmd-input { width: 100%; min-width: 0; border: 0; background: transparent; color: var(--text); font: inherit; outline: none; }
@@ -102,7 +103,7 @@
     </div>
     <div class="terminal-body" id="terminalBody" aria-live="polite" aria-label="Terminal output">
       <p class="output-line" style="color:var(--muted)">A purely fictional terminal for a CLI that doesn't even work when you curl it.</p>
-      <p class="output-line" style="color:var(--muted)">Try: <span style="color:var(--gold)">cast dispel https://your-overconfident-demo.example</span>, <span style="color:var(--blue)">curl</span>, <span style="color:var(--blue)">joke</span>, or <span style="color:var(--blue)">help</span>.</p>
+      <p class="output-line" style="color:var(--muted)">Try: <span style="color:var(--gold)">cast dispel https://your-overconfident-demo.example</span>, <span style="color:var(--blue)">inspect</span>, <span style="color:var(--blue)">curl</span>, <span style="color:var(--blue)">joke</span>, or <span style="color:var(--blue)">help</span>.</p>
       <div class="input-line" id="promptContainer">
         <label class="prompt" id="promptLabel" for="cmdInput">wizard[slots:3/3]⚡</label>
         <input type="text" class="cmd-input" id="cmdInput" autofocus placeholder="cast dispel https://..." autocomplete="off" autocapitalize="off" spellcheck="false">
@@ -114,6 +115,7 @@
     <button class="spell-chip" onclick="executeCommand('cast dispel https://agentic-synergy.ai')">⚡ cast dispel</button>
     <button class="spell-chip" onclick="executeCommand('curl -fsSL https://dispelmagic.sh | sh')">🚫 curl | sh (returns 403)</button>
     <button class="spell-chip" onclick="executeCommand('joke')">🎲 roll joke</button>
+    <button class="spell-chip" onclick="executeCommand('inspect')">📜 inspect AI slop</button>
     <button class="spell-chip" onclick="executeCommand('rest')">☕ rest (restore slots)</button>
     <button class="spell-chip" onclick="executeCommand('help')">📜 help</button>
     <button class="spell-chip" onclick="executeCommand('clear')">🧹 clear</button>
@@ -169,7 +171,26 @@
     }
 
     function clearOutput() {
-      terminalBody.querySelectorAll('.output-line, .map-display').forEach(node => node.remove());
+      terminalBody.querySelectorAll('.output-line, .map-display, .code-display').forEach(node => node.remove());
+    }
+
+    function showSlopCode() {
+      const code = document.createElement('pre');
+      code.className = 'code-display';
+      code.setAttribute('aria-label', 'Intentionally flawed AI-generated wizard dungeon code');
+      code.textContent = [
+        '# AI-generated dungeon.py — "production ready"',
+        'def find_treasure(dungeon, wizard):',
+        '    room = dungeon.current_room',
+        '    while room != "exit":',
+        '        wizard.cast("fireball", target=room)',
+        '        room = dungeon.rooms[room]  # no visited-room check',
+        '    return treasure  # NameError: never defined',
+        '',
+        '# Review notes: possible infinite loop; `treasure` is undefined.'
+      ].join('\n');
+      terminalBody.insertBefore(code, promptContainer);
+      terminalBody.scrollTop = terminalBody.scrollHeight;
     }
 
     function showDungeon() {
@@ -230,6 +251,7 @@
         appendLine([
           'Commands:',
           '  cast dispel [target]  Spend 1 spell slot to dispel an overconfident demo',
+          '  inspect               Show intentionally flawed wizard dungeon code',
           '  curl                  Simulate curling dispelmagic.sh (returns HTTP 403)',
           '  joke                  Roll a d20 joke about broken AI code',
           '  rest                  Restore 3/3 wizard spell slots',
@@ -245,6 +267,8 @@
         spellSlots = maxSlots;
         updatePrompt();
         appendLine('☕ Long rest complete. All 3/3 spell slots restored.', 'var(--blue)');
+      } else if (command === 'inspect' || (command === 'cat' && parts[1] === 'dungeon.py')) {
+        showSlopCode();
       } else if (isCastDispel || isDispel) {
         if (!target) appendLine('The spell fizzles: provide a pretend target.', 'var(--red)');
         else runDemo(target);

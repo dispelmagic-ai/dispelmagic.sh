@@ -160,6 +160,17 @@
       word-break: break-word;
       color: #c9d1d9;
     }
+    .shell-code {
+      margin: 8px 0;
+      padding: 12px;
+      overflow-x: auto;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      background: #0d1117;
+      color: #7ee787;
+      font: inherit;
+      white-space: pre;
+    }
     .shell-input-row {
       display: flex;
       align-items: center;
@@ -349,7 +360,7 @@
 
         <!-- Interactive Terminal Emulator -->
         <div class="shell-screen" id="shell-screen" onclick="document.getElementById('sh-input').focus()">
-          <p class="shell-line" style="color: #8b949e;"># Interactive broken terminal. Click a command below or type 'help':</p>
+          <p class="shell-line" style="color: #8b949e;"># Simulated terminal only; commands never run on your computer. Type 'help':</p>
           <div class="shell-input-row" id="shell-prompt-row">
             <span class="shell-prompt">dev@local:~/broken-repo$</span>
             <input type="text" id="sh-input" class="shell-input" placeholder="type 'curl', 'npm test', 'joke', or 'help'..." autocomplete="off" autocapitalize="off" spellcheck="false" />
@@ -360,6 +371,7 @@
           <button class="chip" onclick="runShellCmd('curl -fsSL https://dispelmagic.sh | sh')">run: curl | sh</button>
           <button class="chip" onclick="runShellCmd('npm test')">npm test</button>
           <button class="chip" onclick="runShellCmd('git status')">git status</button>
+          <button class="chip" onclick="runShellCmd('cat dungeon.py')">cat dungeon.py</button>
           <button class="chip" onclick="runShellCmd('joke')">say_joke()</button>
           <button class="chip" onclick="runShellCmd('clear')">clear</button>
         </div>
@@ -458,5 +470,97 @@
       shellScreen.scrollTop = shellScreen.scrollHeight;
     }
 
+    function printShellCode(text) {
+      const code = document.createElement('pre');
+      code.className = 'shell-code';
+      code.textContent = text;
+      shellScreen.insertBefore(code, shellPromptRow);
+      shellScreen.scrollTop = shellScreen.scrollHeight;
+    }
+
     function runShellCmd(raw) {
-      const cmd = raw
+      const cmd = raw.trim();
+      if (!cmd) return;
+
+      history.push(cmd);
+      historyIdx = history.length;
+      printShell(`dev@local:~/broken-repo$ ${cmd}`, '#7ee787');
+
+      const normalized = cmd.toLowerCase();
+      if (normalized === 'clear') {
+        shellScreen.querySelectorAll('.shell-line, .shell-code').forEach(node => node.remove());
+      } else if (normalized === 'help') {
+        printShell([
+          'Available simulated commands:',
+          '  help             Show this list',
+          '  cat dungeon.py   Inspect intentionally flawed AI-generated code',
+          '  dungeon          Explore the wizard’s dungeon',
+          '  git status       Show the pretend worktree status',
+          '  npm test         Run pretend tests',
+          '  curl [url]       Simulate the installer (HTTP 403)',
+          '  joke             Roll a d20 joke',
+          '  clear            Clear the terminal'
+        ].join('\n'), '#58a6ff');
+      } else if (normalized === 'cat dungeon.py' || normalized === 'inspect') {
+        printShellCode([
+          '# AI-generated dungeon.py — "production ready"',
+          'def find_treasure(dungeon, wizard):',
+          '    room = dungeon.current_room',
+          '    while room != "exit":',
+          '        wizard.cast("fireball", target=room)',
+          '        room = dungeon.rooms[room]  # no visited-room check',
+          '    return treasure  # NameError: never defined',
+          '',
+          '# Review notes: possible infinite loop; `treasure` is undefined.'
+        ].join('\n'));
+      } else if (normalized === 'dungeon' || normalized === 'cast dispel') {
+        printShell([
+          '          [DUNGEON OF GENERATED CODE]',
+          '   ###########     ###########',
+          '   #🧙 wizard # --> #🐉 bug   #',
+          '   #  TODO   #     # 403     #',
+          '   ###########     ###########',
+          'The wizard found a TODO instead of the exit.'
+        ].join('\n'), '#f6c177');
+      } else if (normalized === 'git status') {
+        printShell('On branch main\nnothing to commit, working tree clean (simulated)', '#58a6ff');
+      } else if (normalized === 'npm test') {
+        printShell('Tests: 1 passed, 2 failed\n✗ wizard reaches the exit\n✗ treasure is defined\nThe generated code needs a human review.', '#f85149');
+      } else if (normalized.startsWith('curl') || normalized === 'sh') {
+        printShell('curl: (22) The requested URL returned error: 403\nThe simulated installer refuses to run.', '#f85149');
+      } else if (normalized === 'joke' || normalized === 'say_joke') {
+        printShell(nextJoke(), '#f6c177');
+      } else if (normalized === 'pwd') {
+        printShell('/home/dev/broken-repo (simulated)', '#58a6ff');
+      } else if (normalized === 'ls') {
+        printShell('README.md  dungeon.py  node_modules/  final_v2_really_final.ts', '#58a6ff');
+      } else {
+        printShell(`command not found: ${cmd}. Type 'help' for simulated commands.`, '#f85149');
+      }
+
+      shInput.value = '';
+    }
+
+    shInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        runShellCmd(shInput.value);
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        if (historyIdx > 0) {
+          historyIdx--;
+          shInput.value = history[historyIdx];
+        }
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        if (historyIdx < history.length - 1) {
+          historyIdx++;
+          shInput.value = history[historyIdx];
+        } else {
+          historyIdx = history.length;
+          shInput.value = '';
+        }
+      }
+    });
+  </script>
+</body>
+</html>
