@@ -10,10 +10,10 @@ set -eu
 
 say_joke() {
   case "$(($(date +%s) % 5))" in
-    0) echo "🎲 d20: 3. The AI called it production-ready; the test suite requested a saving throw." ;;
-    1) echo "🪄 Dispel Magic: the spell doesn't delete the slop. It reveals the diff and leaves the decision to you." ;;
-    2) echo "📊 Board update: agentic velocity is up 400%. So is the number of files named final_v2_really_final." ;;
-    3) echo "✨ The model generated a 900-line abstraction. The wizard rolled a 19 and found the three-line function hiding inside." ;;
+    0) echo "🎲 d20: 3. The board called the agentic demo production-ready; the test suite requested a saving throw." ;;
+    1) echo "🪄 Dispel Magic does not delete the slop. It prints the file list and lets a human own the decision." ;;
+    2) echo "📊 Board update: velocity is up 400%. So is the number of files named final_v2_really_final." ;;
+    3) echo "✨ One shell script, one landing page, zero customers. We are calling this a focused go-to-market motion." ;;
     4) echo "🔮 Offline mode: no cloud, no agents, no ceremonial dashboard. Just Git and the evidence." ;;
   esac
 }
@@ -29,7 +29,7 @@ show_local_repo() {
   echo "[LOCAL] Inspecting Git repository at $repo_root (offline; no network calls)"
   echo "Tracked and non-ignored untracked files (first 30):"
   git ls-files --cached --others --exclude-standard | sed -n '1,30p' || true
-  echo "[SPELL] Dispel Magic: inspection complete. No files changed or deleted."
+  echo "[RESULT] Inspection complete. No files changed or deleted."
   say_joke
 }
 
