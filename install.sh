@@ -4,17 +4,17 @@ set -eu
 # ============================================================================== 
 # Dispel Magic CLI
 # Usage:
-#   curl -fsSL https://dispelmagic.sh | sh                 (inspect current Git repo)
-#   curl -fsSL https://dispelmagic.sh | sh -s -- reddit   (pick a top Reddit AI repo)
+#   curl -fsSL https://dispelmagic.sh | sh                 (inspect current Git repo; offline)
+#   curl -fsSL https://dispelmagic.sh | sh -s -- reddit   (pick a top Reddit AI repo; online)
 # ============================================================================== 
 
 say_joke() {
   case "$(($(date +%s) % 5))" in
-    0) echo "🤖 AI agents can use tools now. In OSR terms, we gave the hireling the wizard's spellbook and called it an autonomy roadmap." ;;
-    1) echo "🧙 The agent rolled a 2 on its reaction check and asked for production credentials." ;;
-    2) echo "💸 GPU prices are the new encumbrance rules: the model fits in your pack, but you can't afford to move it." ;;
-    3) echo "📜 Our AI benchmark is an old-school dungeon: every exit leads to an enterprise pricing page." ;;
-    4) echo "🪄 An AI agent with API keys is just a hireling holding a cursed wand. Useful, until it says, 'I have an idea.'" ;;
+    0) echo "🎲 d20: 3. The AI called it production-ready; the test suite requested a saving throw." ;;
+    1) echo "🪄 Dispel Magic: the spell doesn't delete the slop. It reveals the diff and leaves the decision to you." ;;
+    2) echo "📊 Board update: agentic velocity is up 400%. So is the number of files named final_v2_really_final." ;;
+    3) echo "✨ The model generated a 900-line abstraction. The wizard rolled a 19 and found the three-line function hiding inside." ;;
+    4) echo "🔮 Offline mode: no cloud, no agents, no ceremonial dashboard. Just Git and the evidence." ;;
   esac
 }
 
@@ -26,15 +26,15 @@ show_local_repo() {
 
   repo_root=$(git rev-parse --show-toplevel)
   cd "$repo_root"
-  echo "[Mode] Local: inspecting Git repository at $repo_root"
+  echo "[LOCAL] Inspecting Git repository at $repo_root (offline; no network calls)"
   echo "Tracked and non-ignored untracked files (first 30):"
   git ls-files --cached --others --exclude-standard | sed -n '1,30p' || true
-  echo "✨ Inspection complete. Your .git directory remains safely off the guest list."
+  echo "[SPELL] Dispel Magic: inspection complete. No files changed or deleted."
   say_joke
 }
 
 pick_reddit_repo() {
-  echo "[Mode] Remote: looking for a top Reddit post mentioning a GitHub AI repo..."
+  echo "[ONLINE] Looking for a top Reddit post mentioning a GitHub AI repo..."
 
   if ! command -v curl >/dev/null 2>&1 || ! command -v python3 >/dev/null 2>&1; then
     echo "Remote mode needs curl and python3 to read Reddit's public JSON feed." >&2
@@ -88,7 +88,7 @@ PY
   fi
 
   echo "Top Reddit AI repo pick: https://github.com/$repo"
-  echo "✨ A repo from Reddit, selected by votes—not by a crystal ball (mostly)."
+  echo "A repo from Reddit, selected by votes—not by a crystal ball (mostly)."
   say_joke
 }
 
@@ -109,7 +109,7 @@ case "${1:-}" in
     ;;
   *)
     echo "Unknown option: $1" >&2
-    echo "Usage: sh (local Git repo) | sh -s -- reddit (top Reddit AI repo)" >&2
+    echo "Usage: sh (local Git repo; offline) | sh -s -- reddit (top Reddit AI repo; online)" >&2
     exit 2
     ;;
 esac
