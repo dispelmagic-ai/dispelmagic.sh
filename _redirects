@@ -1,0 +1,11 @@
+# ==========================================
+# Cloudflare Pages Edge Routing Rules
+# ==========================================
+
+# 1. Canonicalize www to apex
+https://www.dispelmagic.ai/* https://dispelmagic.ai/:splat 301
+https://www.dispelmagic.sh/* https://dispelmagic.sh/:splat 301
+
+# 2. Serve the wizard terminal on the .ai apex domain
+https://dispelmagic.ai/ /ai-landing.html 200
+https://dispelmagic.ai/* /ai-landing.html 200

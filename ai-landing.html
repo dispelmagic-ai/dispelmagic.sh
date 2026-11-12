@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DispelMagic.sh: a joke about vibe-coded software that doesn't work, wearing a wizard hat." />
+  <meta name="theme-color" content="#0b0914" />
+  <title>Dispel Magic — 3rd-Level Abjuration (Exit Code 403)</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0b0914;
+      --term-bg: #110e20;
+      --text: #e0def4;
+      --muted: #6e6a86;
+      --accent: #c4a7e7;
+      --gold: #f6c177;
+      --blue: #9ccfd8;
+      --red: #eb6f92;
+      --border: #26233a;
+    }
+    * { box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: radial-gradient(ellipse at 50% 0, #19152b, var(--bg) 58%);
+      color: var(--text);
+      font: 16px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+    a { color: var(--blue); text-decoration: none; border-bottom: 1px dashed currentColor; }
+    a:hover { border-bottom-style: solid; }
+    a:focus-visible, input:focus-visible, button:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+    header, footer { width: min(100%, 850px); text-align: center; }
+    header { margin: 10px 0 18px; }
+    .tagline { color: var(--accent); font-size: clamp(1rem, 3vw, 1.25rem); font-weight: 700; text-shadow: 0 0 10px #c4a7e74d; margin-bottom: 6px; }
+    .terminal { width: min(100%, 850px); overflow: hidden; border: 2px solid var(--border); border-radius: 9px; background: var(--term-bg); box-shadow: 0 0 40px #000b, 0 0 20px #c4a7e70d; }
+    .terminal-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 2px solid var(--border); background: #191724; }
+    .header-left { display: flex; align-items: center; }
+    .buttons { display: flex; gap: 6px; }
+    .dot { width: 12px; height: 12px; border-radius: 50%; box-shadow: inset 0 0 4px #0008; }
+    .red { background: var(--red); } .yellow { background: var(--gold); } .green { background: var(--blue); }
+    .title { margin-left: 16px; color: var(--muted); font-size: 14px; font-style: italic; }
+    .terminal-body { height: min(58vh, 500px); min-height: 340px; overflow-y: auto; padding: 20px; }
+    .output-line { margin: 0 0 7px; line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .map-display { margin: 12px 0; padding: 10px; overflow-x: auto; border-radius: 4px; background: #0004; color: #908caa; font: 13px/1.25 ui-monospace, monospace; white-space: pre; border: 1px solid var(--border); }
+    .input-line { display: flex; align-items: center; gap: 10px; margin-top: 15px; }
+    .prompt { color: var(--gold); white-space: nowrap; font-weight: 700; }
+    .cmd-input { width: 100%; min-width: 0; border: 0; background: transparent; color: var(--text); font: inherit; outline: none; }
+    .spell-bar {
+      width: min(100%, 850px);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .spell-chip {
+      background: #191724;
+      border: 1px solid var(--border);
+      color: var(--accent);
+      border-radius: 6px;
+      padding: 5px 11px;
+      font: 13px ui-monospace, monospace;
+      cursor: pointer;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .spell-chip:hover { border-color: var(--accent); color: var(--gold); }
+    .notice { width: min(100%, 850px); margin: 14px 0 0; color: var(--muted); font-size: .82rem; }
+    footer { margin-top: auto; padding: 24px 0 4px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 520px) { body { padding: 14px; } .terminal-body { padding: 15px; } .title { margin-left: 12px; font-size: 12px; } }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+  <header>
+    <p class="tagline">🔮 dispelmagic.sh: code that doesn't work, wearing a very large wizard hat.</p>
+    <p style="margin: 0; font-size: 0.95rem;">Inspect the <a href="https://github.com/dispelmagic-ai/dispelmagic.sh">open-source grimoire</a>. Even the <code>curl</code> command returns HTTP 403.</p>
+  </header>
+
+  <main class="terminal" aria-label="Playful simulated wizard terminal">
+    <div class="terminal-header" aria-hidden="true">
+      <div class="header-left">
+        <div class="buttons"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+        <div class="title">archmage_shell — dispelmagic.sh (403 Forbidden)</div>
+      </div>
+      <div style="color: var(--muted); font-size: 12px;">School: Broken Abjuration</div>
+    </div>
+    <div class="terminal-body" id="terminalBody" aria-live="polite" aria-label="Terminal output">
+      <p class="output-line" style="color:var(--muted)">A purely fictional terminal for a CLI that doesn't even work when you curl it.</p>
+      <p class="output-line" style="color:var(--muted)">Try: <span style="color:var(--gold)">cast dispel https://your-overconfident-demo.example</span>, <span style="color:var(--blue)">curl</span>, <span style="color:var(--blue)">joke</span>, or <span style="color:var(--blue)">help</span>.</p>
+      <div class="input-line" id="promptContainer">
+        <label class="prompt" id="promptLabel" for="cmdInput">wizard[slots:3/3]⚡</label>
+        <input type="text" class="cmd-input" id="cmdInput" autofocus placeholder="cast dispel https://..." autocomplete="off" autocapitalize="off" spellcheck="false">
+      </div>
+    </div>
+  </main>
+
+  <div class="spell-bar" aria-label="Quick spell buttons">
+    <button class="spell-chip" onclick="executeCommand('cast dispel https://agentic-synergy.ai')">⚡ cast dispel</button>
+    <button class="spell-chip" onclick="executeCommand('curl -fsSL https://dispelmagic.sh | sh')">🚫 curl | sh (returns 403)</button>
+    <button class="spell-chip" onclick="executeCommand('joke')">🎲 roll joke</button>
+    <button class="spell-chip" onclick="executeCommand('rest')">☕ rest (restore slots)</button>
+    <button class="spell-chip" onclick="executeCommand('help')">📜 help</button>
+    <button class="spell-chip" onclick="executeCommand('clear')">🧹 clear</button>
+  </div>
+
+  <p class="notice"><strong>Reality check:</strong> this entire site is a joke about code that doesn't work. There is no CLI to install—if you try to <code>curl</code> it, the server hands you a 403 error and saves you from running random shell scripts off the internet.</p>
+
+  <footer>
+    <p>Less non-deterministic wizardry. More reading the diff. The repository is on <a href="https://github.com/dispelmagic-ai/dispelmagic.sh">GitHub</a>.</p>
+  </footer>
+
+  <script>
+    const cmdInput = document.getElementById('cmdInput');
+    const terminalBody = document.getElementById('terminalBody');
+    const promptContainer = document.getElementById('promptContainer');
+    const promptLabel = document.getElementById('promptLabel');
+
+    let spellSlots = 3;
+    const maxSlots = 3;
+    const cmdHistory = [];
+    let historyIndex = -1;
+    let jokeCursor = 0;
+
+    const SCRIPT_JOKES = [
+      "🎲 d20: 1 (Critical Failure). The board called the agentic demo production-ready; it just force-pushed node_modules to main and billed you $42.",
+      "🪄 Dispel Magic does not delete the slop. It just prints git ls-files so a human can stare at what they let an autocomplete bot do at 2 AM.",
+      "📊 Board update: velocity is up 400%. Coincidentally, so is the number of files named final_v2_really_final_ACTUALLY_WORKING.ts.",
+      "✨ One broken curl command, one landing page, zero customers, $0 MRR. My VC called this 'deeply concerning'; we call it a 'focused go-to-market motion.'",
+      "🔮 Offline mode: no cloud, no agents, no ceremonial dashboard, no working code. Just Git and the evidence.",
+      "🧙‍♂️ You cast True Seeing on the $50M Seed-stage AI startup. Underneath the pitch deck: 40 lines of broken Python and a hardcoded API key with no rate limit.",
+      "📜 'We don't read diffs anymore, we code by vibes.' — Ancient epitaph found in the smoking ruins of a production database.",
+      "⚔️ You encounter a 9,400-line AI-generated PR titled 'minor refactor'. Will you [R]eview it, or [L]GTM and fake your own death?"
+    ];
+
+    function nextScriptJoke() {
+      const joke = SCRIPT_JOKES[jokeCursor % SCRIPT_JOKES.length];
+      jokeCursor++;
+      return joke;
+    }
+
+    function updatePrompt() {
+      const bolt = spellSlots > 0 ? '⚡' : '💤';
+      promptLabel.textContent = `wizard[slots:${spellSlots}/${maxSlots}]${bolt}`;
+    }
+
+    function appendLine(text, color = 'var(--text)') {
+      const line = document.createElement('p');
+      line.className = 'output-line';
+      line.style.color = color;
+      line.textContent = text;
+      terminalBody.insertBefore(line, promptContainer);
+      terminalBody.scrollTop = terminalBody.scrollHeight;
+    }
+
+    function clearOutput() {
+      terminalBody.querySelectorAll('.output-line, .map-display').forEach(node => node.remove());
+    }
+
+    function showDungeon() {
+      const map = document.createElement('pre');
+      map.className = 'map-display';
+      map.setAttribute('aria-label', 'A tiny ASCII dungeon');
+      map.textContent = [
+        '##############################################',
+        '###.....##########..........######.........###',
+        '###..🧙..##########..403.⚡...######....👺....###',
+        '###.....##########..........######.........###',
+        '#########..............#####................##',
+        '###########################.....##############',
+        '######..........###########..🧠..##############',
+        '######.git diff.###########.....##############',
+        '##############################################'
+      ].join('\n');
+      terminalBody.insertBefore(map, promptContainer);
+    }
+
+    function runDemo(target) {
+      if (spellSlots <= 0) {
+        appendLine('💤 Out of 3rd-level spell slots! Type `rest` to take a coffee break and restore your mana.', 'var(--red)');
+        return;
+      }
+      spellSlots--;
+      updatePrompt();
+
+      appendLine('✨ [Spell manifest] Unfurling a completely imaginary scroll…', 'var(--muted)');
+      appendLine(`🔎 [Target] ${target}`, 'var(--blue)');
+      appendLine('🎲 [Saving throw] Rolling against the urge to call a broken demo a platform…', 'var(--gold)');
+      window.setTimeout(() => {
+        showDungeon();
+        appendLine(nextScriptJoke(), 'var(--gold)');
+        appendLine('💥 [RESULT] The illusion fades. Underneath: code that does not compile and a 403 Forbidden error.', 'var(--red)');
+        terminalBody.scrollTop = terminalBody.scrollHeight;
+      }, 380);
+    }
+
+    function executeCommand(rawInput) {
+      const input = rawInput.trim();
+      if (!input) return;
+
+      cmdHistory.push(input);
+      historyIndex = cmdHistory.length;
+
+      appendLine(`${promptLabel.textContent} ${input}`, 'var(--gold)');
+      const lower = input.toLowerCase();
+      const parts = input.split(/\s+/);
+      const command = parts[0].toLowerCase();
+      const isCastDispel = command === 'cast' && parts[1]?.toLowerCase() === 'dispel';
+      const isDispel = command === 'dispel' || command === './dispelmagic.sh';
+      const target = isCastDispel ? parts.slice(2).join(' ') : parts.slice(1).join(' ');
+
+      if (command === 'clear') {
+        clearOutput();
+      } else if (command === 'help') {
+        appendLine([
+          'Commands:',
+          '  cast dispel [target]  Spend 1 spell slot to dispel an overconfident demo',
+          '  curl                  Simulate curling dispelmagic.sh (returns HTTP 403)',
+          '  joke                  Roll a d20 joke about broken AI code',
+          '  rest                  Restore 3/3 wizard spell slots',
+          '  clear                 Clear terminal output'
+        ].join('\n'), 'var(--blue)');
+      } else if (lower.startsWith('curl') || lower === 'sh') {
+        appendLine('curl: (22) The requested URL returned error: 403', 'var(--red)');
+        appendLine('✨ Spell failed successfully! Even our installer script refuses to run.', 'var(--blue)');
+        appendLine(nextScriptJoke(), 'var(--gold)');
+      } else if (lower === 'joke' || lower === 'say_joke') {
+        appendLine(nextScriptJoke(), 'var(--gold)');
+      } else if (command === 'rest') {
+        spellSlots = maxSlots;
+        updatePrompt();
+        appendLine('☕ Long rest complete. All 3/3 spell slots restored.', 'var(--blue)');
+      } else if (isCastDispel || isDispel) {
+        if (!target) appendLine('The spell fizzles: provide a pretend target.', 'var(--red)');
+        else runDemo(target);
+      } else {
+        appendLine(`Unknown spell: ${parts[0]}. It failed to compile anyway. Try 'help'.`, 'var(--red)');
+      }
+      cmdInput.value = '';
+    }
+
+    cmdInput.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        executeCommand(cmdInput.value);
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        if (historyIndex > 0) {
+          historyIndex--;
+          cmdInput.value = cmdHistory[historyIndex];
+        }
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        if (historyIndex < cmdHistory.length - 1) {
+          historyIndex++;
+          cmdInput.value = cmdHistory[historyIndex];
+        } else {
+          historyIndex = cmdHistory.length;
+          cmdInput.value = '';
+        }
+      }
+    });
+
+    terminalBody.addEventListener('click', () => cmdInput.focus());
+  </script>
+</body>
+</html>
