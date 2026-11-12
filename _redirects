@@ -1,0 +1,12 @@
+# ==========================================
+# Cloudflare Pages Edge Routing Rules
+# ==========================================
+
+# 1. Route curl / script fetching requests to install.sh
+/install.sh 200
+
+# 2. Canonicalize www.dispelmagic.ai to apex .ai
+https://www.dispelmagic.ai/* https://dispelmagic.ai/:splat 301
+
+# 3. Canonicalize www.dispelmagic.sh to apex .sh
+https://www.dispelmagic.sh/* https://dispelmagic.sh/:splat 301
